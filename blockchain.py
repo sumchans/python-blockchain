@@ -1,4 +1,3 @@
-# Initializing our (empty) blockchain list
 genesis_block ={
     'previous_hash':'', 
     'index':0, 
@@ -16,9 +15,7 @@ def get_last_blockchain_value():
         return None
     return blockchain[-1]
 
-# This function accepts two arguments.
-# One required one (transaction_amount) and one optional one (last_transaction)
-# The optional one is optional because it has a default value => [1]
+
 def add_transaction(recipient, sender=owner, amount=1.0):
     transaction = {
         'sender': sender,
@@ -26,13 +23,10 @@ def add_transaction(recipient, sender=owner, amount=1.0):
         'amount': amount}
     open_transactions.append(transaction)
    
+
 def mine_block():
     last_block = blockchain[-1]
-    hashed_block = ''
-    for key in last_block:
-        value = last_block[key]
-        hashed_block = hashed_block + str(value)
-
+    hashed_block = '-'.join([str(last_block[key]) for key in last_block])
     print(hashed_block)
     block = {
         'previous_hash':'XYZ', 
@@ -41,9 +35,8 @@ def mine_block():
     }
     blockchain.append(block)
 
+
 def get_transaction_value():
-    """ Returns the input of the user (a new transaction amount) as a float. """
-    # Get the user input, transform it from a string to a float and store it in user_input
     tx_recipient = input('Enter the recipient of the transaction: ') 
     tx_amount= float(input('Your transaction amount please: '))
     return (tx_recipient, tx_amount)
@@ -60,8 +53,7 @@ def print_blockchain_elements():
         print('-' * 20)
 
 def verify_chain():
-    # block_index = 0
-    
+    # block_index = 0  
     is_valid = True
     for block_index in range(len(blockchain)):
         if block_index == 0:
